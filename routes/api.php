@@ -21,6 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' =>'auth'],function(){
     Route::post('/register', 'Api\Auth\AuthController@register');
     Route::post('/login', 'Api\Auth\AuthController@login');
+    
     Route::post('/logout', 'Api\Auth\AuthController@logout')
+    ->middleware('auth:sanctum');
+
+    Route::post('/password/reset', 'Api\Auth\PasswordController@reset')
     ->middleware('auth:sanctum');
 });
