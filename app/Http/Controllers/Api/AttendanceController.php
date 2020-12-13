@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ImageStorage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class AttendanceController extends Controller{
@@ -19,8 +20,7 @@ class AttendanceController extends Controller{
      * @throws InvalidFormatException
      * @throws BindingResolutionException
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'long' => ['required'],
             'lat' => ['required'],
@@ -106,7 +106,7 @@ class AttendanceController extends Controller{
 
                 return response()->json(
                     [
-                        'message' => 'Success'
+                        'message' => 'Checkout Successful'
                     ],
                     Response::HTTP_CREATED
                 );
@@ -114,11 +114,29 @@ class AttendanceController extends Controller{
 
             return response()->json(
                 [
-                    'message' => 'Please do check in first',
+                    'message' => 'Please do check in first.',
                 ],
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
         }
+    }
+
+
+    public function history(Request $request){
+        $request->validate([
+            'from' =>['required'],
+            'to' =>['required'],
+        ]);
+
+
+        $history = $request->user()->attendances()->with('detail')
+            ->whereBetween(DB::raw('DATE(created_at)'),
+            [$request->from,$request->to])->get();
+
+        return response()->json([
+            'message' =>"list of presences by user.",
+            'data' =>$history,
+        ],Response::HTTP_OK);
     }
     
 }
