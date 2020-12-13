@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '281db694082b1ed1d9d939e8e5c771b8ee1e00a5',
+    'reference' => 'e0d0d6b3d2a98028f5a32c0c6a5316f7583c62ad',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -422,7 +422,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '281db694082b1ed1d9d939e8e5c771b8ee1e00a5',
+      'reference' => 'e0d0d6b3d2a98028f5a32c0c6a5316f7583c62ad',
     ),
     'laravel/sanctum' => 
     array (
@@ -441,6 +441,15 @@
       array (
       ),
       'reference' => '45884b526e10a88a1b179fa1a1a24d5468c668c2',
+    ),
+    'laravel/ui' => 
+    array (
+      'pretty_version' => 'v2.4.0',
+      'version' => '2.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f5398544a9cd4804a42d09ce51735e37cd51ea2d',
     ),
     'league/commonmark' => 
     array (
