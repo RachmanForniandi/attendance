@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\Auth;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class PasswordController extends Controller
 {
-    
+    use SendsPasswordResetEmails;
 
     public function reset(Request $request){
         
