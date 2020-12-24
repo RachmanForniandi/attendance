@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-
+use ConsoleTVs\Charts\Registrar as Charts;
+//use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,8 +22,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Charts $charts)
     {
-        //
+        $charts->register([
+            \App\Charts\AttendanceChart::class
+        ]);
     }
 }

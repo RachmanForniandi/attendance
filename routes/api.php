@@ -27,6 +27,7 @@ Route::group(['prefix' =>'auth'],function(){
 
     Route::post('/password/reset', 'Api\Auth\PasswordController@reset')
     ->middleware('auth:sanctum');
+    Route::post('/password/forgot', 'Api\Auth\PasswordController@sendResetLinkEmail');
 
 });
 

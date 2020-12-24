@@ -1,0 +1,285 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 24 Des 2020 pada 00.55
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.4.13
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `db_attendance`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `attendances`
+--
+
+CREATE TABLE `attendances` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `attendances`
+--
+
+INSERT INTO `attendances` (`id`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '2020-12-13 01:43:29', '2020-12-13 02:51:04'),
+(2, 1, 1, '2020-12-23 09:59:08', '2020-12-23 09:59:25'),
+(3, 5, 1, '2020-12-23 10:01:09', '2020-12-23 10:01:20'),
+(4, 1, 1, '2020-12-23 17:20:26', '2020-12-23 17:35:19'),
+(5, 5, 1, '2020-12-23 17:53:21', '2020-12-23 17:53:31');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `attendance_details`
+--
+
+CREATE TABLE `attendance_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `attendance_id` bigint(20) UNSIGNED NOT NULL,
+  `long` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` enum('in','out') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `attendance_details`
+--
+
+INSERT INTO `attendance_details` (`id`, `attendance_id`, `long`, `lat`, `address`, `photo`, `type`, `created_at`, `updated_at`) VALUES
+(1, 1, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1607849009.jpg', 'in', '2020-12-13 01:43:30', '2020-12-13 01:43:30'),
+(2, 1, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1607853064.jpg', 'out', '2020-12-13 02:51:05', '2020-12-13 02:51:05'),
+(3, 2, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608742748.jpg', 'in', '2020-12-23 09:59:09', '2020-12-23 09:59:09'),
+(4, 2, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608742765.jpg', 'out', '2020-12-23 09:59:25', '2020-12-23 09:59:25'),
+(5, 3, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608742869.jpg', 'in', '2020-12-23 10:01:09', '2020-12-23 10:01:09'),
+(6, 3, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608742880.jpg', 'out', '2020-12-23 10:01:20', '2020-12-23 10:01:20'),
+(7, 4, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608769226.jpg', 'in', '2020-12-23 17:20:26', '2020-12-23 17:20:26'),
+(8, 4, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608770119.jpg', 'out', '2020-12-23 17:35:19', '2020-12-23 17:35:19'),
+(9, 5, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608771201.jpg', 'in', '2020-12-23 17:53:21', '2020-12-23 17:53:21'),
+(10, 5, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608771211.jpg', 'out', '2020-12-23 17:53:31', '2020-12-23 17:53:31');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2020_11_24_145337_create_attendances_table', 1),
+(5, '2020_11_24_150112_create_attendance_details_table', 1),
+(6, '2019_12_14_000001_create_personal_access_tokens_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
+(30, 'App\\User', 1, 'web', '85f104c393770d966744612ba6a4cfac6f38ed52b802627719804408161d6aa8', '[\"*\"]', '2020-12-13 04:57:19', '2020-12-13 02:53:09', '2020-12-13 04:57:19'),
+(31, 'App\\User', 5, 'web', '7a58d22239974a049292068b8614ba02d76261e7e449bf2528bbe7314775403b', '[\"*\"]', NULL, '2020-12-13 10:51:16', '2020-12-13 10:51:16'),
+(32, 'App\\User', 5, 'web', '738580e565985fd14064ee656301936953b4546aee96793f45c02df3531e2861', '[\"*\"]', NULL, '2020-12-13 10:52:55', '2020-12-13 10:52:55'),
+(33, 'App\\User', 1, 'web', 'e02527a6da4af49cb6897231107d69ff30c66f7dfea56a24a26e2caa8443c321', '[\"*\"]', '2020-12-23 09:59:25', '2020-12-23 09:58:06', '2020-12-23 09:59:25'),
+(34, 'App\\User', 5, 'web', '955359738eee04d01711fb5aff825813f693513a1e1b748e8be514b476dbfc8d', '[\"*\"]', '2020-12-23 10:01:20', '2020-12-23 10:00:22', '2020-12-23 10:01:20'),
+(35, 'App\\User', 1, 'web', 'a58446ef895938077ec434269762a230d9135a37fe3667d9945e0c1f36856556', '[\"*\"]', '2020-12-23 17:35:19', '2020-12-23 17:19:45', '2020-12-23 17:35:19'),
+(36, 'App\\User', 5, 'web', 'ef28eac92356542949903750f3cfeed9b0c841e6804cd441d69c076176015554', '[\"*\"]', '2020-12-23 17:53:31', '2020-12-23 17:52:57', '2020-12-23 17:53:31');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_admin` tinyint(1) NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `is_admin`, `photo`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$mKVUAtB2E8Vda5bAPSbXeOcTNlGdliLsRU7DE55f0/sTZB.tHJl6G', 1, NULL, NULL, '2020-11-27 08:58:55', '2020-12-10 12:01:27'),
+(5, 'member1', 'member1@gmail.com', NULL, '$2y$10$IxjxnelPQIPt7rLid722R.HWhppg/WyA6.oPaft/.bKCYOhEPMFTW', 0, NULL, NULL, '2020-12-13 10:51:16', '2020-12-13 10:51:16'),
+(6, 'Member 2', 'member2@gmail.com', NULL, '$2y$10$97uEdClG9VcRksmvVl6e8eUJ9Rn04UWclaWfrtXZNjGrrSq0PNZL.', 0, 'member-2-1607882329.jpg', NULL, '2020-12-13 10:58:49', '2020-12-13 10:58:49');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `attendances`
+--
+ALTER TABLE `attendances`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `attendance_details`
+--
+ALTER TABLE `attendance_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indeks untuk tabel `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `attendances`
+--
+ALTER TABLE `attendances`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `attendance_details`
+--
+ALTER TABLE `attendance_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
