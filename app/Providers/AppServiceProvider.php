@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 use ConsoleTVs\Charts\Registrar as Charts;
+//use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Des 2020 pada 19.11
+-- Waktu pembuatan: 24 Des 2020 pada 00.55
 -- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.2.34
+-- Versi PHP: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,11 @@ CREATE TABLE `attendances` (
 --
 
 INSERT INTO `attendances` (`id`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '2020-12-13 01:43:29', '2020-12-13 02:51:04');
+(1, 1, 1, '2020-12-13 01:43:29', '2020-12-13 02:51:04'),
+(2, 1, 1, '2020-12-23 09:59:08', '2020-12-23 09:59:25'),
+(3, 5, 1, '2020-12-23 10:01:09', '2020-12-23 10:01:20'),
+(4, 1, 1, '2020-12-23 17:20:26', '2020-12-23 17:35:19'),
+(5, 5, 1, '2020-12-23 17:53:21', '2020-12-23 17:53:31');
 
 -- --------------------------------------------------------
 
@@ -66,7 +70,15 @@ CREATE TABLE `attendance_details` (
 
 INSERT INTO `attendance_details` (`id`, `attendance_id`, `long`, `lat`, `address`, `photo`, `type`, `created_at`, `updated_at`) VALUES
 (1, 1, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1607849009.jpg', 'in', '2020-12-13 01:43:30', '2020-12-13 01:43:30'),
-(2, 1, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1607853064.jpg', 'out', '2020-12-13 02:51:05', '2020-12-13 02:51:05');
+(2, 1, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1607853064.jpg', 'out', '2020-12-13 02:51:05', '2020-12-13 02:51:05'),
+(3, 2, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608742748.jpg', 'in', '2020-12-23 09:59:09', '2020-12-23 09:59:09'),
+(4, 2, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608742765.jpg', 'out', '2020-12-23 09:59:25', '2020-12-23 09:59:25'),
+(5, 3, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608742869.jpg', 'in', '2020-12-23 10:01:09', '2020-12-23 10:01:09'),
+(6, 3, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608742880.jpg', 'out', '2020-12-23 10:01:20', '2020-12-23 10:01:20'),
+(7, 4, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608769226.jpg', 'in', '2020-12-23 17:20:26', '2020-12-23 17:20:26'),
+(8, 4, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'admin-1608770119.jpg', 'out', '2020-12-23 17:35:19', '2020-12-23 17:35:19'),
+(9, 5, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608771201.jpg', 'in', '2020-12-23 17:53:21', '2020-12-23 17:53:21'),
+(10, 5, '-6.23976000', '106.72741000', 'Bintaro Jaya,Tangsel', 'member1-1608771211.jpg', 'out', '2020-12-23 17:53:31', '2020-12-23 17:53:31');
 
 -- --------------------------------------------------------
 
@@ -144,7 +156,11 @@ CREATE TABLE `personal_access_tokens` (
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
 (30, 'App\\User', 1, 'web', '85f104c393770d966744612ba6a4cfac6f38ed52b802627719804408161d6aa8', '[\"*\"]', '2020-12-13 04:57:19', '2020-12-13 02:53:09', '2020-12-13 04:57:19'),
 (31, 'App\\User', 5, 'web', '7a58d22239974a049292068b8614ba02d76261e7e449bf2528bbe7314775403b', '[\"*\"]', NULL, '2020-12-13 10:51:16', '2020-12-13 10:51:16'),
-(32, 'App\\User', 5, 'web', '738580e565985fd14064ee656301936953b4546aee96793f45c02df3531e2861', '[\"*\"]', NULL, '2020-12-13 10:52:55', '2020-12-13 10:52:55');
+(32, 'App\\User', 5, 'web', '738580e565985fd14064ee656301936953b4546aee96793f45c02df3531e2861', '[\"*\"]', NULL, '2020-12-13 10:52:55', '2020-12-13 10:52:55'),
+(33, 'App\\User', 1, 'web', 'e02527a6da4af49cb6897231107d69ff30c66f7dfea56a24a26e2caa8443c321', '[\"*\"]', '2020-12-23 09:59:25', '2020-12-23 09:58:06', '2020-12-23 09:59:25'),
+(34, 'App\\User', 5, 'web', '955359738eee04d01711fb5aff825813f693513a1e1b748e8be514b476dbfc8d', '[\"*\"]', '2020-12-23 10:01:20', '2020-12-23 10:00:22', '2020-12-23 10:01:20'),
+(35, 'App\\User', 1, 'web', 'a58446ef895938077ec434269762a230d9135a37fe3667d9945e0c1f36856556', '[\"*\"]', '2020-12-23 17:35:19', '2020-12-23 17:19:45', '2020-12-23 17:35:19'),
+(36, 'App\\User', 5, 'web', 'ef28eac92356542949903750f3cfeed9b0c841e6804cd441d69c076176015554', '[\"*\"]', '2020-12-23 17:53:31', '2020-12-23 17:52:57', '2020-12-23 17:53:31');
 
 -- --------------------------------------------------------
 
@@ -231,13 +247,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `attendance_details`
 --
 ALTER TABLE `attendance_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -255,7 +271,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
