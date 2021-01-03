@@ -1,22 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\Api\Auth;
+
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use App\Http\Controllers\Controller;
 
-class AuthController extends Controller{
-    
-    public function register(Request $request){
+class AuthController extends Controller
+{
+    public function register(Request $request)
+    {
         $data = $request->validate([
-            'name' =>['required','string','max:255'],
-            'email' =>['required','string','email','max:255','unique:users'],
-            'password' =>['required','string','min:8'],
-            'device_name' =>['required']
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'device_name' => ['required']
         ]);
 
         $data['password'] = Hash::make($request->password);
@@ -24,10 +26,10 @@ class AuthController extends Controller{
 
         $user = User::create($data);
 
-        if(!Auth::attempt($request->only('email','password'))){
+        if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
                 'message' => 'The provided credentials are incorrect.',
-            ],Response::HTTP_UNPROCESSABLE_ENTITY);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $accessToken = Auth::user()->createToken($request->device_name)->plainTextToken;
@@ -35,24 +37,25 @@ class AuthController extends Controller{
         return response()->json([
             'message' => 'success',
             'data' => $user,
-            'meta' =>[
+            'meta' => [
                 'token' => $accessToken
             ]
-        ],Response::HTTP_CREATED);
+        ], Response::HTTP_CREATED);
     }
 
-    public function login(Request $request){
-        $data = $request->validate([
-            'email' =>'required|email',
-            'password' =>'required',
-            'device_name' =>'required'
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'device_name' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
 
-        if(! $user || !Hash::check($request->password,$user->password)){
-            return ValidationException::WithMessages([
-                'message' => 'The provided credentials are incorrect.',
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'message' => ['The provided credentials are incorrect.'],
             ]);
         }
 
@@ -61,17 +64,17 @@ class AuthController extends Controller{
         return response()->json([
             'message' => 'success',
             'data' => $user,
-            'meta' =>[
+            'meta' => [
                 'token' => $accessToken
             ]
-        ],Response::HTTP_CREATED);
+        ], Response::HTTP_CREATED);
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         $request->user()->tokens()->delete();
         return response()->json([
-            'message' => 'logout success'
-        ],Response::HTTP_OK);
+            'message' => 'log out success'
+        ], Response::HTTP_OK);
     }
-
 }

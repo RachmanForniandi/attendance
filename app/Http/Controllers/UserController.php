@@ -8,20 +8,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
-
 class UserController extends Controller
 {
     use ImageStorage;
 
-    public function __construct(){
+    /**
+     * Construct
+     * @return void
+     */
+    public function __construct()
+    {
         $this->middleware(['auth', 'is_admin']);
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         if ($request->ajax()) {
             $data = User::query();
 
@@ -63,11 +69,11 @@ class UserController extends Controller
     {
         $photo = $request->file('image');
 
-        if($photo){
-            $request['photo'] = $this->uploadImage($photo,$request->name,'profile');
+        if ($photo) {
+            $request['photo'] = $this->uploadImage($photo, $request->name, 'profile');
         }
 
-        $request['password'] =Hash::make($request->password);
+        $request['password'] = Hash::make($request->password);
 
         User::create($request->all());
 
@@ -83,7 +89,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('pages.user.show',compact('user'));
+        return view('pages.user.show', compact('user'));
     }
 
     /**
@@ -95,7 +101,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('pages.user.edit',compact('user'));
+        return view('pages.user.edit', compact('user'));
     }
 
     /**
@@ -110,18 +116,17 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $photo = $request->file('image');
 
-        if($photo){
-            $request['photo'] = $this->uploadImage($photo,$request->name,'profile',true,$user->photo);
+        if ($photo) {
+            $request['photo'] = $this->uploadImage($photo, $request->name, 'profile', true, $user->photo);
         }
 
-        if($request->password){
-             $request['password'] = Hash::make($request->password);
-        }else{
+        if ($request->password) {
+            $request['password'] = Hash::make($request->password);
+        } else {
             $request['password'] = $user->password;
         }
-       
 
-        User::update($request->all());
+        $user->update($request->all());
 
         return redirect()->route('user.index');
     }
@@ -136,11 +141,12 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($user->photo){
-            $this->deleteImage($user->photo,'profile');
+        if ($user->photo) {
+            $this->deleteImage($user->photo, 'profile');
         }
 
         $user->delete();
+
         return redirect()->route('user.index');
     }
 }
